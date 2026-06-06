@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>HRS Official | Hulubalang Racing Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #1f0b3a;
+            color: #f3eaff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* BACKGROUND UNGU TERANG DENGAN ANIMASI GLOW & GELOMBANG */
+        .bg-wallpaper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at 30% 40%, #b87cff, #6c2eb3, #401b6b);
+            background-size: 200% 200%;
+            animation: gradientFlow 14s ease infinite alternate;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background: radial-gradient(ellipse at 30% 40%, #b87cff, #8a44d4, #572c8a); }
+            50% { background: radial-gradient(ellipse at 70% 60%, #d29bff, #aa56f0, #732bcf); }
+            100% { background: radial-gradient(ellipse at 40% 50%, #c48aff, #9b4ae6, #5c249c); }
+        }
+        
+        .bg-wallpaper::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, rgba(255, 200, 255, 0.1) 0px, rgba(255, 200, 255, 0.1) 1px, transparent 1px, transparent 20px);
+            pointer-events: none;
+            animation: softShift 18s linear infinite;
+        }
+        
+        @keyframes softShift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(4%, 3%); }
+        }
+        
+        .bg-wallpaper::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 60% 30%, rgba(210, 130, 255, 0.35) 0%, transparent 70%);
+            animation: pulseGlow 3s ease infinite alternate;
+        }
+        
+        @keyframes pulseGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.9; }
+        }
+        
+        /* Partikel mengambang warna ungu muda */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(230, 180, 255, 0.6);
+            border-radius: 50%;
+            filter: blur(6px);
+            animation: floatParticle 14s infinite alternate ease-in-out;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
+            100% { transform: translateY(-70px) translateX(40px); opacity: 0.7; }
+        }
+        
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #3f2570; }
+        ::-webkit-scrollbar-thumb { background: #e5aaff; border-radius: 20px; }
+        
+        /* TOP BAR - premium glass ungu */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(45, 25, 75, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            z-index: 99999;
+            border-bottom: 2px solid rgba(220, 150, 255, 0.7);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .top-bar .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #efcdff;
+            box-shadow: 0 0 12px #cf9eff;
+        }
+        .cdp-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f5ecff, #e5bcff, #d897ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 34px;
+            align-items: center;
+        }
+        .nav-menu a {
+            color: #f1dcff;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+        .nav-menu a:hover {
+            background: rgba(210, 140, 255, 0.4);
+            color: white;
+            box-shadow: 0 0 8px #ddadff;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: #efcdff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        @media (max-width: 650px) {
+            .logo-area { gap: 8px; }
+            .cdp-title { font-size: 1.2rem; }
+            .logo-img { width: 40px; height: 40px; }
+            .hamburger { display: flex; }
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 70%;
+                height: calc(100vh - 70px);
+                background: rgba(30, 18, 55, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding-top: 40px;
+                gap: 24px;
+                transition: 0.3s;
+                z-index: 99998;
+                border-right: 1px solid #cb92ff;
+            }
+            .nav-menu.active { left: 0; }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        }
+        
+        .main-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 105px 24px 50px;
+            position: relative;
+            z-index: 2;
+        }
+        @media (max-width: 650px) { .main-content { padding: 90px 16px 40px; } }
+        
+        .hero-section-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #ffffff, #eac0ff, #c688ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #f2dbff;
+            letter-spacing: 2px;
+        }
+        .hero-divider {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #edbefb, #d394ff, #edbefb, transparent);
+            margin: 15px auto;
+            border-radius: 4px;
+        }
+        @media (max-width: 550px) {
+            .hero-title { font-size: 1.9rem; }
+            .hero-subtitle { font-size: 0.7rem; }
+        }
+        
+        .search-section {
+            max-width: 560px;
+            margin: 10px auto 20px;
+        }
+        .search-box {
+            display: flex;
+            background: rgba(55, 35, 90, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 70px;
+            border: 1px solid #e0aaff;
+        }
+        .search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 22px;
+            color: #fff0ff;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .search-box button {
+            background: #c47eff;
+            border: none;
+            padding: 8px 26px;
+            border-radius: 60px;
+            font-weight: bold;
+            color: #1a0b2e;
+            margin: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .search-box button:hover { background: #e3aeff; transform: scale(1.02); }
+        
+        .register-trigger {
+            background: linear-gradient(110deg, #321f5a, #2c1b4e);
+            border-radius: 50px;
+            padding: 16px 25px;
+            margin: 15px auto 35px;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            border: 1px solid #e6b3ff;
+            transition: 0.2s;
+        }
+        .register-trigger:hover { transform: scale(1.01); background: #432c70; border-color: #ffc8ff; }
+        .trigger-logo { width: 70px; height: 70px; border-radius: 30px; border: 1px solid #e8b6ff; object-fit: cover; }
+        .trigger-text h3 { color: #ffffff; font-size: 1.2rem; }
+        .trigger-text p { color: #cfb5ff; font-size: 0.75rem; }
+        
+        /* KATEGORI PRODUK */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0 25px;
+            flex-wrap: wrap;
+        }
+        .category-tab {
+            background: rgba(48, 30, 78, 0.8);
+            border: 1px solid #d696ff;
+            border-radius: 50px;
+            padding: 10px 28px;
+            font-weight: 700;
+            color: #f4e2ff;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .category-tab.active {
+            background: #cc8eff;
+            color: #210f3a;
+            border-color: white;
+            box-shadow: 0 0 15px #ecb3ff;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 35px 0;
+        }
+        .product-card {
+            background: rgba(33, 20, 58, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 36px;
+            padding: 22px 18px;
+            text-align: center;
+            border: 1px solid #d49eff;
+            transition: 0.2s;
+        }
+        .product-card:hover { transform: translateY(-6px); border-color: #f7c4ff; background: #412d6ecc; }
+        .product-img { width: 100%; max-width: 220px; border-radius: 30px; margin-bottom: 18px; }
+        .product-name { font-size: 1.2rem; font-weight: 800; margin: 12px 0; color: #f8f0ff; }
+        .btn-buy {
+            background: linear-gradient(95deg, #c17eff, #9b4ced);
+            padding: 10px 28px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        /* bagian info-banner dan donation section dihilangkan */
+        
+        .rules-box, .tutorial-box {
+            background: rgba(33, 20, 60, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid #dda0ff;
+            border-radius: 32px;
+            padding: 24px;
+            margin: 35px auto;
+            max-width: 750px;
+        }
+        .rules-box h3, .tutorial-box h3 { color: #ffdcff; text-align: center; margin-bottom: 18px; }
+        .step-list { display: flex; flex-direction: column; gap: 15px; }
+        .step-item {
+            background: #2f1e5a;
+            border-radius: 28px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 5px solid #e8b6ff;
+        }
+        .step-number {
+            background: #cd8eff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* TEAM GRID - Full crew update */
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin: 45px 0 30px;
+        }
+        .team-card {
+            background: rgba(38, 23, 66, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            padding: 28px 20px;
+            width: 280px;
+            text-align: center;
+            border: 2px solid #ddacff;
+            transition: 0.2s;
+        }
+        .team-card:hover { transform: translateY(-5px); border-color: #ffd2ff; background: #482f7e; }
+        .team-avatar-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f3c2ff;
+            margin-bottom: 15px;
+        }
+        .role-name { font-size: 1.3rem; font-weight: 800; color: #fff2ff; margin-top: 8px; }
+        .role-title { color: #e4bcff; font-weight: 600; margin-bottom: 12px; font-size: 0.9rem; }
+        .btn-view-profile {
+            background: rgba(200, 140, 255, 0.3);
+            border: 1px solid #ecaaff;
+            padding: 8px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #f5e2ff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .btn-view-profile:hover { background: #cd96ff; color: #1b0a30; }
+        
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #efd3ff, #dbaeff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 35px 0 15px;
+        }
+        footer {
+            text-align: center;
+            border-top: 1px solid #bc8aff;
+            padding: 28px;
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: #e2c9ff;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 100000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #271d48;
+            border-radius: 48px;
+            padding: 28px;
+            width: 90%;
+            max-width: 450px;
+            border: 2px solid #dbb5ff;
+        }
+        .modal-close { float: right; font-size: 28px; cursor: pointer; color: #e2bcff; }
+        .modal-form input, .modal-form select {
+            width: 100%;
+            background: #352a5e;
+            border: 1px solid #ca95ff;
+            border-radius: 60px;
+            padding: 10px 18px;
+            margin-bottom: 14px;
+            color: white;
+        }
+        .modal-form button {
+            background: #c67eff;
+            width: 100%;
+            padding: 12px;
+            border-radius: 60px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #240f48;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 999999;
+            transition: 0.5s;
+        }
+        .preloader.hide { opacity: 0; visibility: hidden; }
+        .wheel-spin {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #e6bdff, #aa5eff);
+            animation: spinLinear 0.9s infinite linear;
+            box-shadow: 0 0 40px #f3c2ff;
+        }
+        @keyframes spinLinear { to { transform: rotate(360deg); } }
+        .preloader h3 { margin-top: 20px; color: #f5e2ff; letter-spacing: 3px; }
+    </style>
+</head>
+<body>
+
+<div class="bg-wallpaper"></div>
+<div class="particles" id="particles"></div>
+
+<div id="preloader" class="preloader">
+    <div class="wheel-spin"></div>
+    <h3>HRS RACING CREW</h3>
+    <div style="color:#efceff;">Hulubalang Racing Style</div>
+</div>
+
+<div class="top-bar">
+    <div class="container">
+        <div class="logo-area">
+            <img class="logo-img" src="https://files.catbox.moe/f8sr7c.jpg" alt="HRS" onerror="this.src='https://placehold.co/70x70/5a2d9c/ffffff?text=HRS'">
+            <div class="cdp-title">HRS OFFICIAL</div>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="#shop">🔥 PRODUK</a>
+            <a href="#team">🏁 TEAM</a>
+            <a href="#" id="daftarBtnNav">📝 DAFTAR MEMBER</a>
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="search-section">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔎 Cari produk HRS...">
+            <button id="searchBtn">Cari</button>
+        </div>
+    </div>
+
+    <div id="registerTriggerBlock" class="register-trigger">
+        <img class="trigger-logo" src="https://files.catbox.moe/f8sr7c.jpg" alt="logo hrs">
+        <div class="trigger-text">
+            <h3>⚡ DAFTAR MENJADI ANGGOTA HRS ⚡</h3>
+            <p>Isi formulir, raih seragam kebanggaan & bergabung dengan keluarga balap!</p>
+        </div>
+    </div>
+
+    <section id="shop">
+        <div class="hero-section-title">
+            <div class="hero-title">HULUBALANG RACING STYLE</div>
+            <div class="hero-subtitle">SPEED • IDENTITY • BROTHERHOOD</div>
+            <div class="hero-divider"></div>
+        </div>
+
+        <div class="category-tabs" id="categoryTabs">
+            <div class="category-tab active" data-category="ALL">ALL</div>
+            <div class="category-tab" data-category="Owner">OWNER EDITION</div>
+            <div class="category-tab" data-category="Admin">ADMIN EDITION</div>
+            <div class="category-tab" data-category="Member">MEMBER EDITION</div>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <!-- BAGIAN INFO BANNER DAN DONASI TELAH DIHAPUS -->
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeModal">&times;</span>
+            <img class="trigger-logo" src="https://files.catbox.moe/f8sr7c.jpg" width="60" style="border-radius: 30px;">
+            <h3>📝 FORMULIR HRS</h3>
+            <form class="modal-form" id="registerFormModal">
+                <input type="text" id="fullName" placeholder="Nama Lengkap" required>
+                <input type="text" id="robloxUser" placeholder="Username Roblox" required>
+                <select id="gender" required><option disabled selected>Pilih Gender</option><option>Laki-laki</option><option>Perempuan</option></select>
+                <input type="number" id="age" placeholder="Umur" required>
+                <input type="tel" id="whatsappNumber" placeholder="Nomor WhatsApp" required>
+                <button type="submit">🚀 KIRIM PENDAFTARAN</button>
+            </form>
+            <div id="modalMessage" style="font-size: 0.7rem; margin-top: 12px;"></div>
+        </div>
+    </div>
+
+    <div class="rules-box">
+        <h3>📜 PERATURAN TEAM HRS</h3>
+        <ol style="margin-left: 22px; color: #f0deff;">
+            <li>✅ Dilarang toxic berlebihan & menyinggung sesama</li>
+            <li>✅ Wajib memakai atribut saat event/racing</li>
+            <li>✅ Dilarang share link phising / 18+</li>
+            <li>✅ Saling menghormati antar member & owner</li>
+            <li>✅ Cinem rutin setiap minggu (racing day)</li>
+        </ol>
+    </div>
+
+    <div class="tutorial-box">
+        <h3>📘 TUTORIAL DAFTAR HRS</h3>
+        <div class="step-list">
+            <div class="step-item"><span class="step-number">1</span><span>Klik tombol <strong>DAFTAR MEMBER</strong> di atas/bawah</span></div>
+            <div class="step-item"><span class="step-number">2</span><span>Isi data diri dengan lengkap (nama, roblox, gender, umur, WA)</span></div>
+            <div class="step-item"><span class="step-number">3</span><span>Klik Kirim, maka email akan terbuka otomatis</span></div>
+            <div class="step-item"><span class="step-number">4</span><span>Kirim ke <strong>zanysahidalwi@gmail.com</strong> lalu tunggu konfirmasi owner</span></div>
+        </div>
+    </div>
+
+    <section id="team">
+        <h2 class="section-title">🏆 ELITE CREW - HRS RACING 🏆</h2>
+        <div class="team-grid" id="teamGrid"></div>
+        <p style="text-align: center; color: #dabbff; margin-top: 20px;">#HRSFamily | Fast & Respect</p>
+    </section>
+
+    <footer>
+        <div>🏁 HULUBALANG RACING STYLE — HRS OFFICIAL COMMUNITY 🏁</div>
+        <div>© 2025 HRS | Unity • Style • Speed</div>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // PRODUK sesuai gambar baru (semua menggunakan link gambar yang diberikan)
+        const products = [
+            { name:"👑 BAJU OWNER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/933440365f1a914c94cc086b5a62d778", category:"Owner", keywords:"owner baju hrs special" },
+            { name:"🛡️ BAJU ADMIN HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/6dc15947f4529445b5256efeaf8fb2eb", category:"Admin", keywords:"admin baju hrs" },
+            { name:"⚡ BAJU MEMBER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/7d15d05b14f9114ea74046f60ef468a2", category:"Member", keywords:"member baju hrs racing" }
+        ];
+        
+        // TEAM LENGKAP sesuai permintaan (5 anggota)
+        const teamList = [
+            { name:"(zany)", displayName:"zany", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-750B50A581AEF370E2B0C0592B9402D0-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/2829947199", role:"Founder / Owner" },
+            { name:"(ECELXSPEED)", displayName:"ECELXSPEED", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-F00E072A8B364CF6F218D540215A3DC4-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8776368660", role:"Co-Leader / Race Manager" },
+            { name:"TOGAR50(stockrazzz)", displayName:"TOGAR50", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-822CA83A6C2BDA102DEB9FB7B98CC1FE-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8250092726", role:"Mechanic / Senior" },
+            { name:"Ramadhaniali45(Ramaali)", displayName:"Ramadhaniali45", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-52465CA6B0E640DE1F716EC4E3F4D0D1-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/10721116752", role:"Chief Operator" },
+            { name:"adipbaehaki(Hulubalangzzz)", displayName:"adipbaehaki", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-1BE42051C1AA51FCB8A0B9FB3E8D18AC-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/2841809745", role:"Elite Racer / Mod" }
+        ];
+        
+        const productGrid = document.getElementById('productGrid');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        let currentCategory = "ALL";
+        let currentSearch = "";
+        
+        function renderProducts() {
+            let filtered = [...products];
+            if(currentCategory !== "ALL") filtered = filtered.filter(p => p.category === currentCategory);
+            if(currentSearch.trim()) {
+                let term = currentSearch.toLowerCase();
+                filtered = filtered.filter(p => p.name.toLowerCase().includes(term) || p.keywords.includes(term));
+            }
+            productGrid.innerHTML = "";
+            if(filtered.length === 0) { productGrid.innerHTML = `<div style="text-align:center;padding:40px;">✨ Produk tidak ditemukan ✨</div>`; return; }
+            filtered.forEach(p => {
+                productGrid.innerHTML += `<div class="product-card">
+                    <img class="product-img" src="${p.image}" onerror="this.src='https://placehold.co/400x400/412b71/cba6ff?text=HRS'">
+                    <div class="product-name">${p.name}</div>
+                    <a href="${p.link}" target="_blank" class="btn-buy">BELI SEKARANG →</a>
+                </div>`;
+            });
+        }
+        
+        const tabs = document.querySelectorAll('.category-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentCategory = tab.getAttribute('data-category');
+                renderProducts();
+            });
+        });
+        searchBtn.onclick = () => { currentSearch = searchInput.value; renderProducts(); };
+        searchInput.onkeyup = (e) => { if(e.key === 'Enter') { currentSearch = searchInput.value; renderProducts(); } };
+        renderProducts();
+        
+        // RENDER TEAM
+        const teamContainer = document.getElementById('teamGrid');
+        teamList.forEach(member => {
+            teamContainer.innerHTML += `
+                <div class="team-card">
+                    <img class="team-avatar-img" src="${member.avatar}" onerror="this.src='https://placehold.co/140x140/351f60/d9a9ff?text=HRS'">
+                    <div class="role-name">${member.displayName}</div>
+                    <div class="role-title">${member.role}</div>
+                    <a href="${member.profile}" target="_blank" class="btn-view-profile">👤 LIHAT PROFILE</a>
+                </div>
+            `;
+        });
+        
+        // Preloader
+        const preloader = document.getElementById('preloader');
+        setTimeout(() => { if(preloader) { preloader.classList.add('hide'); setTimeout(() => { preloader.style.display = 'none'; }, 500); } }, 1600);
+        window.addEventListener('load', () => { if(preloader) preloader.classList.add('hide'); });
+        
+        // hamburger
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
+        document.querySelectorAll('.nav-menu a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId && targetId !== "#") { const target = document.querySelector(targetId); if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } }
+            });
+        });
+        
+        const modalReg = document.getElementById('registerModal');
+        const trigger = document.getElementById('registerTriggerBlock');
+        const daftarNav = document.getElementById('daftarBtnNav');
+        const closeModal = document.getElementById('closeModal');
+        trigger.onclick = () => modalReg.style.display = 'flex';
+        if(daftarNav) daftarNav.onclick = (e) => { e.preventDefault(); modalReg.style.display = 'flex'; };
+        closeModal.onclick = () => modalReg.style.display = 'none';
+        window.onclick = (e) => { if(e.target === modalReg) modalReg.style.display = 'none'; };
+        
+        const formReg = document.getElementById('registerFormModal');
+        const msgDiv = document.getElementById('modalMessage');
+        formReg.onsubmit = function(e) {
+            e.preventDefault();
+            const nama = document.getElementById('fullName').value, roblox = document.getElementById('robloxUser').value, gender = document.getElementById('gender').value, umur = document.getElementById('age').value, wa = document.getElementById('whatsappNumber').value;
+            if(!nama || !roblox || !gender || !umur || !wa) { msgDiv.innerHTML = "⚠️ Lengkapi semua field!"; return; }
+            const targetEmail = "zanysahidalwi@gmail.com";
+            const subject = `[PENDAFTARAN HRS TEAM] ${nama} bergabung`;
+            const body = `Halo Owner HRS,\n\n━━━━ DATA PENDAFTARAN ━━━━\nNama: ${nama}\nRoblox: ${roblox}\nGender: ${gender}\nUmur: ${umur}\nWhatsApp: ${wa}\n━━━━━━━━━━━━━━━━━━\nTerima kasih! segera diproses.\n\nHRS Racing`;
+            window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            msgDiv.innerHTML = "✅ Pendaftaran terkirim! Cek email & tunggu konfirmasi.";
+            setTimeout(() => { formReg.reset(); modalReg.style.display = 'none'; msgDiv.innerHTML = ""; }, 2000);
+        };
+        
+        // background particle
+        const partContainer = document.getElementById('particles');
+        for(let i=0; i<70; i++) {
+            let p = document.createElement('div'); p.classList.add('particle');
+            let s = Math.random() * 9 + 3; p.style.width = s+'px'; p.style.height = s+'px';
+            p.style.left = Math.random()*100+'%'; p.style.top = Math.random()*100+'%';
+            p.style.animationDuration = 12 + Math.random() * 20 + 's';
+            partContainer.appendChild(p);
+        }
+    })();
+</script>
+</body>
+</html>
