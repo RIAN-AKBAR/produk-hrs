@@ -19,7 +19,7 @@
             min-height: 100vh;
         }
         
-        /* BACKGROUND UNGU TERANG DENGAN ANIMASI GLOW & GELOMBANG */
+        /* BACKGROUND UNGU TERANG DENGAN ANIMASI GLOW */
         .bg-wallpaper {
             position: fixed;
             top: 0;
@@ -67,7 +67,7 @@
             100% { opacity: 0.9; }
         }
         
-        /* Partikel mengambang warna ungu muda */
+        /* Partikel mengambang */
         .particles {
             position: fixed;
             top: 0;
@@ -93,7 +93,7 @@
         ::-webkit-scrollbar-track { background: #3f2570; }
         ::-webkit-scrollbar-thumb { background: #e5aaff; border-radius: 20px; }
         
-        /* TOP BAR - premium glass ungu */
+        /* TOP BAR */
         .top-bar {
             position: fixed;
             top: 0;
@@ -122,11 +122,11 @@
         .logo-img {
             width: 48px;
             height: 48px;
-            object-fit: contain;  /* TIDAK DIPOTONG, MENJAGA ASPEK RASIO */
+            object-fit: contain;
             border-radius: 12px;
             filter: drop-shadow(0 0 6px #cf9eff);
         }
-        .cdp-title {
+        .brand-title {
             font-size: 1.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, #f5ecff, #e5bcff, #d897ff);
@@ -168,7 +168,7 @@
         }
         @media (max-width: 650px) {
             .logo-area { gap: 8px; }
-            .cdp-title { font-size: 1.2rem; }
+            .brand-title { font-size: 1.2rem; }
             .logo-img { width: 40px; height: 40px; }
             .hamburger { display: flex; }
             .nav-menu {
@@ -281,7 +281,7 @@
         .trigger-logo { 
             width: 70px; 
             height: 70px; 
-            object-fit: contain;  /* TIDAK DIPOTONG */
+            object-fit: contain;
             border-radius: 16px; 
             background: rgba(0,0,0,0.2);
             padding: 4px;
@@ -372,7 +372,7 @@
             font-weight: bold;
         }
         
-        /* TEAM GRID - Full crew update */
+        /* TEAM GRID */
         .team-grid {
             display: flex;
             flex-wrap: wrap;
@@ -478,64 +478,77 @@
             margin: 0 auto 10px;
             display: block;
         }
-        /* PRELOADER DENGAN LOGO TIDAK TERPOTONG */
+        
+        /* ========== PRELOADER KEREN TAPI SIMPEL ========== */
         .preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #1c0c38;
+            background: #0c0520;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             z-index: 999999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
         .preloader.hide {
             opacity: 0;
             visibility: hidden;
         }
         .preloader-logo {
-            width: 130px;
-            height: 130px;
-            object-fit: contain;  /* Logo utuh tanpa terpotong */
-            filter: drop-shadow(0 0 20px #daaaff);
-            margin-bottom: 20px;
-            animation: logoPulse 1.2s infinite alternate;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 25px;
+            animation: gentleFloat 1.5s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 15px #d08eff);
         }
-        @keyframes logoPulse {
-            0% { transform: scale(0.96); filter: drop-shadow(0 0 8px #c47eff); }
-            100% { transform: scale(1.05); filter: drop-shadow(0 0 28px #f0bcff); }
+        @keyframes gentleFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-12px); }
         }
-        .preloader h3 {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, #ffffff, #f0c8ff);
+        .preloader h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #e2bcff, #c992ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             letter-spacing: 3px;
-            margin-top: 8px;
+            margin-top: 10px;
         }
-        .preloader-sub {
-            font-size: 0.9rem;
-            color: #dcb5ff;
-            margin-top: 8px;
+        .preloader p {
+            color: #cfaaff;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            letter-spacing: 2px;
         }
-        .preloader-spinner {
-            width: 80px;
-            height: 80px;
+        .preloader-dots {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            border: 3px solid rgba(210, 140, 255, 0.3);
-            border-top-color: #e5adff;
-            animation: spinPre 0.8s infinite linear;
-            margin-top: 22px;
+            background: #c98eff;
+            animation: pulseDot 1s ease infinite alternate;
         }
-        @keyframes spinPre { to { transform: rotate(360deg); } }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes pulseDot {
+            0% { transform: scale(0.6); opacity: 0.4; background: #b86eff; }
+            100% { transform: scale(1.2); opacity: 1; background: #f0cdff; }
+        }
         @media (max-width: 550px) {
-            .preloader-logo { width: 95px; height: 95px; }
-            .preloader h3 { font-size: 1.3rem; }
+            .preloader-logo { width: 75px; height: 75px; }
+            .preloader h2 { font-size: 1.4rem; }
+            .preloader p { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -544,19 +557,23 @@
 <div class="bg-wallpaper"></div>
 <div class="particles" id="particles"></div>
 
-<!-- PRELOADER DENGAN LOGO UTUH (TIDAK DIPOTONG) -->
+<!-- PRELOADER KEREN TAPI SIMPEL -->
 <div id="preloader" class="preloader">
-    <img class="preloader-logo" src="https://files.catbox.moe/f8sr7c.jpg" alt="HRS Logo" onerror="this.src='https://placehold.co/130x130/512e8c/ffffff?text=HRS'">
-    <h3>HRS RACING</h3>
-    <div class="preloader-sub">Hulubalang Racing Style</div>
-    <div class="preloader-spinner"></div>
+    <img class="preloader-logo" src="https://files.catbox.moe/f8sr7c.jpg" alt="HRS Logo" onerror="this.src='https://placehold.co/100x100/512e8c/ffffff?text=HRS'">
+    <h2>HRS OFFICIAL</h2>
+    <p>Hulubalang Racing Style</p>
+    <div class="preloader-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
 </div>
 
 <div class="top-bar">
     <div class="container">
         <div class="logo-area">
             <img class="logo-img" src="https://files.catbox.moe/f8sr7c.jpg" alt="HRS" onerror="this.src='https://placehold.co/70x70/5a2d9c/ffffff?text=HRS'">
-            <div class="cdp-title">HRS OFFICIAL</div>
+            <div class="brand-title">HRS OFFICIAL</div>
         </div>
         <div class="hamburger" id="hamburger">
             <span></span><span></span><span></span>
@@ -597,6 +614,7 @@
             <div class="category-tab" data-category="Owner">OWNER EDITION</div>
             <div class="category-tab" data-category="Admin">ADMIN EDITION</div>
             <div class="category-tab" data-category="Member">MEMBER EDITION</div>
+            <div class="category-tab" data-category="Joki">JOKI EDITION</div>
         </div>
 
         <div class="product-grid" id="productGrid"></div>
@@ -622,11 +640,13 @@
     <div class="rules-box">
         <h3>📜 PERATURAN TEAM HRS</h3>
         <ol style="margin-left: 22px; color: #f0deff;">
-            <li>✅ Dilarang toxic berlebihan & menyinggung sesama</li>
-            <li>✅ Wajib memakai atribut saat event/racing</li>
-            <li>✅ Dilarang share link phising / 18+</li>
-            <li>✅ Saling menghormati antar member & owner</li>
-            <li>✅ Cinem rutin setiap minggu (racing day)</li>
+            <li>❌ NO KIRIM 18+</li>
+            <li>🤝 JANGAN BERTENGKAR DENGAN MEMBER/ADMIN</li>
+            <li>💬 WAJIB SOPAN</li>
+            <li>🚫 NO NGEMIS AKUN</li>
+            <li>🚫 NO NGEMIS GP</li>
+            <li>🎬 CINEMATIC 3 HARI SEKALI</li>
+            <li>🚫 NO KIRIM KARTEL</li>
         </ol>
     </div>
 
@@ -654,14 +674,16 @@
 
 <script>
     (function() {
-        // PRODUK sesuai gambar yang diberikan (semua pakai link gambar yang sama)
+        // PRODUK lengkap dengan Celana (Member) dan Joki (kategori baru)
         const products = [
             { name:"👑 BAJU OWNER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/933440365f1a914c94cc086b5a62d778", category:"Owner", keywords:"owner baju hrs special" },
             { name:"🛡️ BAJU ADMIN HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/6dc15947f4529445b5256efeaf8fb2eb", category:"Admin", keywords:"admin baju hrs" },
-            { name:"⚡ BAJU MEMBER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/7d15d05b14f9114ea74046f60ef468a2", category:"Member", keywords:"member baju hrs racing" }
+            { name:"⚡ BAJU MEMBER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/7d15d05b14f9114ea74046f60ef468a2", category:"Member", keywords:"member baju hrs racing" },
+            { name:"👖 CELANA HRS", image:"https://tr.rbxcdn.com/180DAY-6a7f3c2c374a446c5276e72c7debbfca/420/420/Pants/Webp/noFilter", link:"https://www.roblox.com/share?code=0c584af8f9952243b99e1f442a1176e0&type=AvatarItemDetails", category:"Member", keywords:"celana hrs celana member" },
+            { name:"🏍️ JOKI HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/share?code=fb1f44d037ff684a891b82baceccf0dc&type=AvatarItemDetails", category:"Joki", keywords:"joki hrs racing joki" }
         ];
         
-        // TEAM LENGKAP (5 anggota)
+        // TEAM LENGKAP (6 anggota)
         const teamList = [
             { name:"(zany)", displayName:"zany", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-750B50A581AEF370E2B0C0592B9402D0-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/2829947199", role:"Owner" },
             { name:"Ramadhaniali45(Ramaali)", displayName:"Ramadhaniali45", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-52465CA6B0E640DE1F716EC4E3F4D0D1-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/10721116752", role:"Petinggi" },
@@ -716,24 +738,24 @@
                     <div class="team-card">
                         <img class="team-avatar-img" src="${member.avatar}" onerror="this.src='https://placehold.co/140x140/351f60/d9a9ff?text=HRS'">
                         <div class="role-name">${member.displayName}</div>
-                        <div class="role-title">${member.role}</div>
+                        <div class="role-title">👑 ${member.role}</div>
                         <a href="${member.profile}" target="_blank" class="btn-view-profile">👤 LIHAT PROFILE</a>
                     </div>
                 `;
             });
         }
         
-        // Preloader hilang
+        // Preloader hilang setelah beberapa detik
         const preloaderDiv = document.getElementById('preloader');
         if(preloaderDiv) {
             const hidePreloader = () => {
                 if(preloaderDiv && !preloaderDiv.classList.contains('hide')) {
                     preloaderDiv.classList.add('hide');
-                    setTimeout(() => { if(preloaderDiv) preloaderDiv.style.display = 'none'; }, 600);
+                    setTimeout(() => { if(preloaderDiv) preloaderDiv.style.display = 'none'; }, 500);
                 }
             };
             setTimeout(hidePreloader, 2000);
-            window.addEventListener('load', () => setTimeout(hidePreloader, 500));
+            window.addEventListener('load', () => setTimeout(hidePreloader, 600));
         }
         
         // Hamburger
