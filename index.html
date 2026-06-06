@@ -122,10 +122,9 @@
         .logo-img {
             width: 48px;
             height: 48px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid #efcdff;
-            box-shadow: 0 0 12px #cf9eff;
+            object-fit: contain;  /* TIDAK DIPOTONG, MENJAGA ASPEK RASIO */
+            border-radius: 12px;
+            filter: drop-shadow(0 0 6px #cf9eff);
         }
         .cdp-title {
             font-size: 1.8rem;
@@ -279,7 +278,14 @@
             transition: 0.2s;
         }
         .register-trigger:hover { transform: scale(1.01); background: #432c70; border-color: #ffc8ff; }
-        .trigger-logo { width: 70px; height: 70px; border-radius: 30px; border: 1px solid #e8b6ff; object-fit: cover; }
+        .trigger-logo { 
+            width: 70px; 
+            height: 70px; 
+            object-fit: contain;  /* TIDAK DIPOTONG */
+            border-radius: 16px; 
+            background: rgba(0,0,0,0.2);
+            padding: 4px;
+        }
         .trigger-text h3 { color: #ffffff; font-size: 1.2rem; }
         .trigger-text p { color: #cfb5ff; font-size: 0.75rem; }
         
@@ -334,8 +340,6 @@
             text-decoration: none;
             display: inline-block;
         }
-        
-        /* bagian info-banner dan donation section dihilangkan */
         
         .rules-box, .tutorial-box {
             background: rgba(33, 20, 60, 0.85);
@@ -467,31 +471,72 @@
             border: none;
             cursor: pointer;
         }
+        .modal-logo-form {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin: 0 auto 10px;
+            display: block;
+        }
+        /* PRELOADER DENGAN LOGO TIDAK TERPOTONG */
         .preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #240f48;
+            background: #1c0c38;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             z-index: 999999;
-            transition: 0.5s;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-        .preloader.hide { opacity: 0; visibility: hidden; }
-        .wheel-spin {
-            width: 160px;
-            height: 160px;
+        .preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-logo {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;  /* Logo utuh tanpa terpotong */
+            filter: drop-shadow(0 0 20px #daaaff);
+            margin-bottom: 20px;
+            animation: logoPulse 1.2s infinite alternate;
+        }
+        @keyframes logoPulse {
+            0% { transform: scale(0.96); filter: drop-shadow(0 0 8px #c47eff); }
+            100% { transform: scale(1.05); filter: drop-shadow(0 0 28px #f0bcff); }
+        }
+        .preloader h3 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ffffff, #f0c8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 3px;
+            margin-top: 8px;
+        }
+        .preloader-sub {
+            font-size: 0.9rem;
+            color: #dcb5ff;
+            margin-top: 8px;
+        }
+        .preloader-spinner {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: radial-gradient(circle, #e6bdff, #aa5eff);
-            animation: spinLinear 0.9s infinite linear;
-            box-shadow: 0 0 40px #f3c2ff;
+            border: 3px solid rgba(210, 140, 255, 0.3);
+            border-top-color: #e5adff;
+            animation: spinPre 0.8s infinite linear;
+            margin-top: 22px;
         }
-        @keyframes spinLinear { to { transform: rotate(360deg); } }
-        .preloader h3 { margin-top: 20px; color: #f5e2ff; letter-spacing: 3px; }
+        @keyframes spinPre { to { transform: rotate(360deg); } }
+        @media (max-width: 550px) {
+            .preloader-logo { width: 95px; height: 95px; }
+            .preloader h3 { font-size: 1.3rem; }
+        }
     </style>
 </head>
 <body>
@@ -499,10 +544,12 @@
 <div class="bg-wallpaper"></div>
 <div class="particles" id="particles"></div>
 
+<!-- PRELOADER DENGAN LOGO UTUH (TIDAK DIPOTONG) -->
 <div id="preloader" class="preloader">
-    <div class="wheel-spin"></div>
-    <h3>HRS RACING CREW</h3>
-    <div style="color:#efceff;">Hulubalang Racing Style</div>
+    <img class="preloader-logo" src="https://files.catbox.moe/f8sr7c.jpg" alt="HRS Logo" onerror="this.src='https://placehold.co/130x130/512e8c/ffffff?text=HRS'">
+    <h3>HRS RACING</h3>
+    <div class="preloader-sub">Hulubalang Racing Style</div>
+    <div class="preloader-spinner"></div>
 </div>
 
 <div class="top-bar">
@@ -555,12 +602,10 @@
         <div class="product-grid" id="productGrid"></div>
     </section>
 
-    <!-- BAGIAN INFO BANNER DAN DONASI TELAH DIHAPUS -->
-
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" id="closeModal">&times;</span>
-            <img class="trigger-logo" src="https://files.catbox.moe/f8sr7c.jpg" width="60" style="border-radius: 30px;">
+            <img class="modal-logo-form" src="https://files.catbox.moe/f8sr7c.jpg" alt="logo">
             <h3>📝 FORMULIR HRS</h3>
             <form class="modal-form" id="registerFormModal">
                 <input type="text" id="fullName" placeholder="Nama Lengkap" required>
@@ -609,14 +654,14 @@
 
 <script>
     (function() {
-        // PRODUK sesuai gambar baru (semua menggunakan link gambar yang diberikan)
+        // PRODUK sesuai gambar yang diberikan (semua pakai link gambar yang sama)
         const products = [
             { name:"👑 BAJU OWNER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/933440365f1a914c94cc086b5a62d778", category:"Owner", keywords:"owner baju hrs special" },
             { name:"🛡️ BAJU ADMIN HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/6dc15947f4529445b5256efeaf8fb2eb", category:"Admin", keywords:"admin baju hrs" },
             { name:"⚡ BAJU MEMBER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/7d15d05b14f9114ea74046f60ef468a2", category:"Member", keywords:"member baju hrs racing" }
         ];
         
-        // TEAM LENGKAP sesuai permintaan (5 anggota)
+        // TEAM LENGKAP (5 anggota)
         const teamList = [
             { name:"(zany)", displayName:"zany", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-750B50A581AEF370E2B0C0592B9402D0-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/2829947199", role:"Founder / Owner" },
             { name:"(ECELXSPEED)", displayName:"ECELXSPEED", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-F00E072A8B364CF6F218D540215A3DC4-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8776368660", role:"Co-Leader / Race Manager" },
@@ -664,27 +709,41 @@
         
         // RENDER TEAM
         const teamContainer = document.getElementById('teamGrid');
-        teamList.forEach(member => {
-            teamContainer.innerHTML += `
-                <div class="team-card">
-                    <img class="team-avatar-img" src="${member.avatar}" onerror="this.src='https://placehold.co/140x140/351f60/d9a9ff?text=HRS'">
-                    <div class="role-name">${member.displayName}</div>
-                    <div class="role-title">${member.role}</div>
-                    <a href="${member.profile}" target="_blank" class="btn-view-profile">👤 LIHAT PROFILE</a>
-                </div>
-            `;
-        });
+        if(teamContainer) {
+            teamList.forEach(member => {
+                teamContainer.innerHTML += `
+                    <div class="team-card">
+                        <img class="team-avatar-img" src="${member.avatar}" onerror="this.src='https://placehold.co/140x140/351f60/d9a9ff?text=HRS'">
+                        <div class="role-name">${member.displayName}</div>
+                        <div class="role-title">${member.role}</div>
+                        <a href="${member.profile}" target="_blank" class="btn-view-profile">👤 LIHAT PROFILE</a>
+                    </div>
+                `;
+            });
+        }
         
-        // Preloader
-        const preloader = document.getElementById('preloader');
-        setTimeout(() => { if(preloader) { preloader.classList.add('hide'); setTimeout(() => { preloader.style.display = 'none'; }, 500); } }, 1600);
-        window.addEventListener('load', () => { if(preloader) preloader.classList.add('hide'); });
+        // Preloader hilang
+        const preloaderDiv = document.getElementById('preloader');
+        if(preloaderDiv) {
+            const hidePreloader = () => {
+                if(preloaderDiv && !preloaderDiv.classList.contains('hide')) {
+                    preloaderDiv.classList.add('hide');
+                    setTimeout(() => { if(preloaderDiv) preloaderDiv.style.display = 'none'; }, 600);
+                }
+            };
+            setTimeout(hidePreloader, 2000);
+            window.addEventListener('load', () => setTimeout(hidePreloader, 500));
+        }
         
-        // hamburger
+        // Hamburger
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
-        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
-        document.querySelectorAll('.nav-menu a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
+        if(hamburger && navMenu) {
+            hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
+            document.querySelectorAll('.nav-menu a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
+        }
+        
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
@@ -692,37 +751,42 @@
             });
         });
         
+        // Modal pendaftaran
         const modalReg = document.getElementById('registerModal');
         const trigger = document.getElementById('registerTriggerBlock');
         const daftarNav = document.getElementById('daftarBtnNav');
         const closeModal = document.getElementById('closeModal');
-        trigger.onclick = () => modalReg.style.display = 'flex';
-        if(daftarNav) daftarNav.onclick = (e) => { e.preventDefault(); modalReg.style.display = 'flex'; };
-        closeModal.onclick = () => modalReg.style.display = 'none';
-        window.onclick = (e) => { if(e.target === modalReg) modalReg.style.display = 'none'; };
+        if(trigger) trigger.onclick = () => { if(modalReg) modalReg.style.display = 'flex'; };
+        if(daftarNav) daftarNav.onclick = (e) => { e.preventDefault(); if(modalReg) modalReg.style.display = 'flex'; };
+        if(closeModal) closeModal.onclick = () => { if(modalReg) modalReg.style.display = 'none'; };
+        window.onclick = (e) => { if(e.target === modalReg && modalReg) modalReg.style.display = 'none'; };
         
         const formReg = document.getElementById('registerFormModal');
         const msgDiv = document.getElementById('modalMessage');
-        formReg.onsubmit = function(e) {
-            e.preventDefault();
-            const nama = document.getElementById('fullName').value, roblox = document.getElementById('robloxUser').value, gender = document.getElementById('gender').value, umur = document.getElementById('age').value, wa = document.getElementById('whatsappNumber').value;
-            if(!nama || !roblox || !gender || !umur || !wa) { msgDiv.innerHTML = "⚠️ Lengkapi semua field!"; return; }
-            const targetEmail = "zanysahidalwi@gmail.com";
-            const subject = `[PENDAFTARAN HRS TEAM] ${nama} bergabung`;
-            const body = `Halo Owner HRS,\n\n━━━━ DATA PENDAFTARAN ━━━━\nNama: ${nama}\nRoblox: ${roblox}\nGender: ${gender}\nUmur: ${umur}\nWhatsApp: ${wa}\n━━━━━━━━━━━━━━━━━━\nTerima kasih! segera diproses.\n\nHRS Racing`;
-            window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            msgDiv.innerHTML = "✅ Pendaftaran terkirim! Cek email & tunggu konfirmasi.";
-            setTimeout(() => { formReg.reset(); modalReg.style.display = 'none'; msgDiv.innerHTML = ""; }, 2000);
-        };
+        if(formReg) {
+            formReg.onsubmit = function(e) {
+                e.preventDefault();
+                const nama = document.getElementById('fullName').value, roblox = document.getElementById('robloxUser').value, gender = document.getElementById('gender').value, umur = document.getElementById('age').value, wa = document.getElementById('whatsappNumber').value;
+                if(!nama || !roblox || !gender || !umur || !wa) { if(msgDiv) msgDiv.innerHTML = "⚠️ Lengkapi semua field!"; return; }
+                const targetEmail = "zanysahidalwi@gmail.com";
+                const subject = `[PENDAFTARAN HRS TEAM] ${nama} bergabung`;
+                const body = `Halo Owner HRS,\n\n━━━━ DATA PENDAFTARAN ━━━━\nNama: ${nama}\nRoblox: ${roblox}\nGender: ${gender}\nUmur: ${umur}\nWhatsApp: ${wa}\n━━━━━━━━━━━━━━━━━━\nTerima kasih! segera diproses.\n\nHRS Racing`;
+                window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                if(msgDiv) msgDiv.innerHTML = "✅ Pendaftaran terkirim! Cek email & tunggu konfirmasi.";
+                setTimeout(() => { formReg.reset(); if(modalReg) modalReg.style.display = 'none'; if(msgDiv) msgDiv.innerHTML = ""; }, 2000);
+            };
+        }
         
-        // background particle
+        // Partikel background
         const partContainer = document.getElementById('particles');
-        for(let i=0; i<70; i++) {
-            let p = document.createElement('div'); p.classList.add('particle');
-            let s = Math.random() * 9 + 3; p.style.width = s+'px'; p.style.height = s+'px';
-            p.style.left = Math.random()*100+'%'; p.style.top = Math.random()*100+'%';
-            p.style.animationDuration = 12 + Math.random() * 20 + 's';
-            partContainer.appendChild(p);
+        if(partContainer) {
+            for(let i=0; i<75; i++) {
+                let p = document.createElement('div'); p.classList.add('particle');
+                let s = Math.random() * 9 + 3; p.style.width = s+'px'; p.style.height = s+'px';
+                p.style.left = Math.random()*100+'%'; p.style.top = Math.random()*100+'%';
+                p.style.animationDuration = 12 + Math.random() * 20 + 's';
+                partContainer.appendChild(p);
+            }
         }
     })();
 </script>
