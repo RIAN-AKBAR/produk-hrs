@@ -557,7 +557,7 @@
 <div class="bg-wallpaper"></div>
 <div class="particles" id="particles"></div>
 
-<!-- PRELOADER KEREN TAPI SIMPEL -->
+<!-- PRELOADER -->
 <div id="preloader" class="preloader">
     <img class="preloader-logo" src="https://files.catbox.moe/f8sr7c.jpg" alt="HRS Logo" onerror="this.src='https://placehold.co/100x100/512e8c/ffffff?text=HRS'">
     <h2>HRS OFFICIAL</h2>
@@ -598,7 +598,7 @@
         <img class="trigger-logo" src="https://files.catbox.moe/f8sr7c.jpg" alt="logo hrs">
         <div class="trigger-text">
             <h3>⚡ DAFTAR MENJADI ANGGOTA HRS ⚡</h3>
-            <p>Isi formulir, raih seragam kebanggaan & bergabung dengan keluarga balap!</p>
+            <p>Isi formulir, kirim via WhatsApp untuk bergabung!</p>
         </div>
     </div>
 
@@ -624,14 +624,15 @@
         <div class="modal-content">
             <span class="modal-close" id="closeModal">&times;</span>
             <img class="modal-logo-form" src="https://files.catbox.moe/f8sr7c.jpg" alt="logo">
-            <h3>📝 FORMULIR HRS</h3>
+            <h3>📝 FORMULIR PENDAFTARAN HRS</h3>
+            <p style="font-size: 0.8rem; margin-bottom: 12px; color: #dbb5ff;">Data akan dikirim via WhatsApp ke Admin</p>
             <form class="modal-form" id="registerFormModal">
                 <input type="text" id="fullName" placeholder="Nama Lengkap" required>
                 <input type="text" id="robloxUser" placeholder="Username Roblox" required>
                 <select id="gender" required><option disabled selected>Pilih Gender</option><option>Laki-laki</option><option>Perempuan</option></select>
                 <input type="number" id="age" placeholder="Umur" required>
                 <input type="tel" id="whatsappNumber" placeholder="Nomor WhatsApp" required>
-                <button type="submit">🚀 KIRIM PENDAFTARAN</button>
+                <button type="submit">📱 KIRIM VIA WHATSAPP</button>
             </form>
             <div id="modalMessage" style="font-size: 0.7rem; margin-top: 12px;"></div>
         </div>
@@ -655,8 +656,8 @@
         <div class="step-list">
             <div class="step-item"><span class="step-number">1</span><span>Klik tombol <strong>DAFTAR MEMBER</strong> di atas/bawah</span></div>
             <div class="step-item"><span class="step-number">2</span><span>Isi data diri dengan lengkap (nama, roblox, gender, umur, WA)</span></div>
-            <div class="step-item"><span class="step-number">3</span><span>Klik Kirim, maka email akan terbuka otomatis</span></div>
-            <div class="step-item"><span class="step-number">4</span><span>Kirim ke <strong>excelaprillio7@gmail.com</strong> lalu tunggu konfirmasi owner</span></div>
+            <div class="step-item"><span class="step-number">3</span><span>Klik Kirim, maka WhatsApp akan terbuka otomatis</span></div>
+            <div class="step-item"><span class="step-number">4</span><span>Kirim pesan ke nomor <strong>6285198405683</strong> lalu tunggu konfirmasi owner</span></div>
         </div>
     </div>
 
@@ -687,7 +688,7 @@
         const teamList = [
             { name:"(zany)", displayName:"zany", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-750B50A581AEF370E2B0C0592B9402D0-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/2829947199", role:"Owner" },
             { name:"Ramadhaniali45(Ramaali)", displayName:"Ramadhaniali45", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-52465CA6B0E640DE1F716EC4E3F4D0D1-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/10721116752", role:"Petinggi" },
-            { name:"(ECELXSPEED)", displayName:"ECELXSPEED", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-F00E072A8B364CF6F218D540215A3DC4-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8776368660", role:"Penerima Member" },
+            { name:"(ECELXSPEED)", displayName:"ECELXSPEED", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-F00E072A8B364CF6F218D540215A3DC4-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8776368660", role:"Admin" },
             { name:"TOGAR50(stockrazzz)", displayName:"TOGAR50", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-822CA83A6C2BDA102DEB9FB7B98CC1FE-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8250092726", role:"Admin" },
             { name:"adipbaehaki(Hulubalangzzz)", displayName:"adipbaehaki", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-1BE42051C1AA51FCB8A0B9FB3E8D18AC-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/2841809745", role:"Admin" },
             { name:"Faqih_1237822(THEFIRE)", displayName:"Faqih_1237822", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-C7B40895FBAAD9AB5B710C2067D7AFC4-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8823285553", role:"Admin" }
@@ -745,7 +746,7 @@
             });
         }
         
-        // Preloader hilang setelah beberapa detik
+        // Preloader hilang
         const preloaderDiv = document.getElementById('preloader');
         if(preloaderDiv) {
             const hidePreloader = () => {
@@ -774,7 +775,7 @@
             });
         });
         
-        // Modal pendaftaran
+        // Modal pendaftaran via WhatsApp
         const modalReg = document.getElementById('registerModal');
         const trigger = document.getElementById('registerTriggerBlock');
         const daftarNav = document.getElementById('daftarBtnNav');
@@ -786,18 +787,34 @@
         
         const formReg = document.getElementById('registerFormModal');
         const msgDiv = document.getElementById('modalMessage');
+        const waNumber = "6285198405683"; // NOMOR WHATSAPP TUJUAN
+        
         if(formReg) {
             formReg.onsubmit = function(e) {
                 e.preventDefault();
-                const nama = document.getElementById('fullName').value, roblox = document.getElementById('robloxUser').value, gender = document.getElementById('gender').value, umur = document.getElementById('age').value, wa = document.getElementById('whatsappNumber').value;
-                if(!nama || !roblox || !gender || !umur || !wa) { if(msgDiv) msgDiv.innerHTML = "⚠️ Lengkapi semua field!"; return; }
-                // EMAIL BARU: excelaprillio7@gmail.com
-                const targetEmail = "excelaprillio7@gmail.com";
-                const subject = `[PENDAFTARAN HRS TEAM] ${nama} bergabung`;
-                const body = `Halo Owner HRS,\n\n━━━━ DATA PENDAFTARAN ━━━━\nNama: ${nama}\nRoblox: ${roblox}\nGender: ${gender}\nUmur: ${umur}\nWhatsApp: ${wa}\n━━━━━━━━━━━━━━━━━━\nTerima kasih! segera diproses.\n\nHRS Racing`;
-                window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                if(msgDiv) msgDiv.innerHTML = "✅ Pendaftaran terkirim! Cek email & tunggu konfirmasi.";
-                setTimeout(() => { formReg.reset(); if(modalReg) modalReg.style.display = 'none'; if(msgDiv) msgDiv.innerHTML = ""; }, 2000);
+                const nama = document.getElementById('fullName').value.trim();
+                const roblox = document.getElementById('robloxUser').value.trim();
+                const gender = document.getElementById('gender').value;
+                const umur = document.getElementById('age').value.trim();
+                const wa = document.getElementById('whatsappNumber').value.trim();
+                
+                if(!nama || !roblox || !gender || !umur || !wa) { 
+                    if(msgDiv) msgDiv.innerHTML = "⚠️ Lengkapi semua field!"; 
+                    return; 
+                }
+                
+                // Format pesan WhatsApp
+                const message = `*PENDAFTARAN HRS TEAM*%0A%0A📋 *Data Pendaftar:*%0A➤ Nama: ${encodeURIComponent(nama)}%0A➤ Roblox: ${encodeURIComponent(roblox)}%0A➤ Gender: ${encodeURIComponent(gender)}%0A➤ Umur: ${encodeURIComponent(umur)}%0A➤ WhatsApp: ${encodeURIComponent(wa)}%0A%0A📢 *Status:* Menunggu konfirmasi dari Admin HRS.%0A%0A_Hormat saya, calon member HRS_`;
+                
+                const waUrl = `https://wa.me/${waNumber}?text=${message}`;
+                window.open(waUrl, '_blank');
+                
+                if(msgDiv) msgDiv.innerHTML = "✅ Terima kasih! WhatsApp akan terbuka. Kirim pesan untuk konfirmasi.";
+                setTimeout(() => { 
+                    formReg.reset(); 
+                    if(modalReg) modalReg.style.display = 'none'; 
+                    if(msgDiv) msgDiv.innerHTML = ""; 
+                }, 2500);
             };
         }
         
