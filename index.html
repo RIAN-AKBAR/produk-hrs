@@ -479,6 +479,34 @@
             display: block;
         }
         
+        /* Input khusus nomor WA tujuan (untuk admin yang menerima) */
+        .wa-target-input {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .wa-target-input label {
+            font-size: 0.75rem;
+            color: #dbb5ff;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+        .wa-target-input input {
+            width: 100%;
+            background: #352a5e;
+            border: 1px solid #ca95ff;
+            border-radius: 60px;
+            padding: 10px 18px;
+            color: white;
+            font-size: 0.85rem;
+        }
+        .info-text {
+            font-size: 0.7rem;
+            color: #b88eff;
+            text-align: center;
+            margin-top: 8px;
+        }
+        
         /* ========== PRELOADER KEREN TAPI SIMPEL ========== */
         .preloader {
             position: fixed;
@@ -598,7 +626,7 @@
         <img class="trigger-logo" src="https://files.catbox.moe/f8sr7c.jpg" alt="logo hrs">
         <div class="trigger-text">
             <h3>⚡ DAFTAR MENJADI ANGGOTA HRS ⚡</h3>
-            <p>Isi formulir, kirim via WhatsApp untuk bergabung!</p>
+            <p>Isi formulir, kirim via WhatsApp ke Admin pilihan Anda!</p>
         </div>
     </div>
 
@@ -625,16 +653,23 @@
             <span class="modal-close" id="closeModal">&times;</span>
             <img class="modal-logo-form" src="https://files.catbox.moe/f8sr7c.jpg" alt="logo">
             <h3>📝 FORMULIR PENDAFTARAN HRS</h3>
-            <p style="font-size: 0.8rem; margin-bottom: 12px; color: #dbb5ff;">Data akan dikirim via WhatsApp ke Admin</p>
+            <p style="font-size: 0.75rem; margin-bottom: 12px; color: #dbb5ff;">Isi data diri, lalu kirim ke nomor WhatsApp Admin</p>
             <form class="modal-form" id="registerFormModal">
                 <input type="text" id="fullName" placeholder="Nama Lengkap" required>
                 <input type="text" id="robloxUser" placeholder="Username Roblox" required>
                 <select id="gender" required><option disabled selected>Pilih Gender</option><option>Laki-laki</option><option>Perempuan</option></select>
                 <input type="number" id="age" placeholder="Umur" required>
-                <input type="tel" id="whatsappNumber" placeholder="Nomor WhatsApp" required>
-                <button type="submit">📱 KIRIM VIA WHATSAPP</button>
+                <input type="tel" id="whatsappNumber" placeholder="Nomor WhatsApp Kamu" required>
+                
+                <!-- Input untuk nomor WA tujuan (bisa diisi admin mana saja) -->
+                <div class="wa-target-input">
+                    <label>📱 Nomor WhatsApp Admin Tujuan (contoh: 628123456789)</label>
+                    <input type="tel" id="targetWaNumber" placeholder="Masukkan nomor WA Admin penerima" value="6285198405683">
+                </div>
+                <button type="submit">📱 KIRIM KE WHATSAPP</button>
             </form>
             <div id="modalMessage" style="font-size: 0.7rem; margin-top: 12px;"></div>
+            <div class="info-text">💡 Bisa diisi dengan nomor admin mana saja yang tersedia</div>
         </div>
     </div>
 
@@ -655,10 +690,12 @@
         <h3>📘 TUTORIAL DAFTAR HRS</h3>
         <div class="step-list">
             <div class="step-item"><span class="step-number">1</span><span>Klik tombol <strong>DAFTAR MEMBER</strong> di atas/bawah</span></div>
-            <div class="step-item"><span class="step-number">2</span><span>Isi data diri dengan lengkap (nama, roblox, gender, umur, WA)</span></div>
-            <div class="step-item"><span class="step-number">3</span><span>Klik Kirim, maka WhatsApp akan terbuka otomatis</span></div>
-            <div class="step-item"><span class="step-number">4</span><span>Kirim pesan ke nomor <strong>6285198405683</strong> lalu tunggu konfirmasi owner</span></div>
+            <div class="step-item"><span class="step-number">2</span><span>Isi data diri dengan lengkap (nama, roblox, gender, umur, WA Kamu)</span></div>
+            <div class="step-item"><span class="step-number">3</span><span>Masukkan nomor WhatsApp <strong>Admin HRS</strong> yang ingin dihubungi</span></div>
+            <div class="step-item"><span class="step-number">4</span><span>Klik Kirim, WhatsApp akan terbuka & kirim pesan otomatis</span></div>
+            <div class="step-item"><span class="step-number">5</span><span>Tunggu konfirmasi dari Admin HRS</span></div>
         </div>
+        <p style="text-align:center; margin-top:14px; font-size:0.7rem; color:#cfaaff;">✅ Daftar sekarang, jadi bagian dari keluarga HRS!</p>
     </div>
 
     <section id="team">
@@ -675,7 +712,7 @@
 
 <script>
     (function() {
-        // PRODUK lengkap dengan Celana (Member) dan Joki (kategori baru)
+        // PRODUK lengkap
         const products = [
             { name:"👑 BAJU OWNER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/933440365f1a914c94cc086b5a62d778", category:"Owner", keywords:"owner baju hrs special" },
             { name:"🛡️ BAJU ADMIN HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/6dc15947f4529445b5256efeaf8fb2eb", category:"Admin", keywords:"admin baju hrs" },
@@ -775,7 +812,7 @@
             });
         });
         
-        // Modal pendaftaran via WhatsApp
+        // Modal pendaftaran via WhatsApp dengan support semua nomor WA (bisa diisi sendiri)
         const modalReg = document.getElementById('registerModal');
         const trigger = document.getElementById('registerTriggerBlock');
         const daftarNav = document.getElementById('daftarBtnNav');
@@ -787,7 +824,6 @@
         
         const formReg = document.getElementById('registerFormModal');
         const msgDiv = document.getElementById('modalMessage');
-        const waNumber = "6285198405683"; // NOMOR WHATSAPP TUJUAN
         
         if(formReg) {
             formReg.onsubmit = function(e) {
@@ -796,22 +832,33 @@
                 const roblox = document.getElementById('robloxUser').value.trim();
                 const gender = document.getElementById('gender').value;
                 const umur = document.getElementById('age').value.trim();
-                const wa = document.getElementById('whatsappNumber').value.trim();
+                const waPendaftar = document.getElementById('whatsappNumber').value.trim();
+                let targetWa = document.getElementById('targetWaNumber').value.trim();
                 
-                if(!nama || !roblox || !gender || !umur || !wa) { 
-                    if(msgDiv) msgDiv.innerHTML = "⚠️ Lengkapi semua field!"; 
+                if(!nama || !roblox || !gender || !umur || !waPendaftar) { 
+                    if(msgDiv) msgDiv.innerHTML = "⚠️ Lengkapi semua field data diri!"; 
                     return; 
                 }
-                
+                if(!targetWa) {
+                    if(msgDiv) msgDiv.innerHTML = "⚠️ Masukkan nomor WhatsApp Admin tujuan!";
+                    return;
+                }
+                // Bersihkan nomor WA (hapus karakter non-digit selain +)
+                targetWa = targetWa.replace(/\s/g, '');
+                if(!targetWa.match(/^[0-9+]+$/)) {
+                    if(msgDiv) msgDiv.innerHTML = "⚠️ Nomor WA Admin tidak valid! (hanya angka dan +)";
+                    return;
+                }
                 // Format pesan WhatsApp
-                const message = `*PENDAFTARAN HRS TEAM*%0A%0A📋 *Data Pendaftar:*%0A➤ Nama: ${encodeURIComponent(nama)}%0A➤ Roblox: ${encodeURIComponent(roblox)}%0A➤ Gender: ${encodeURIComponent(gender)}%0A➤ Umur: ${encodeURIComponent(umur)}%0A➤ WhatsApp: ${encodeURIComponent(wa)}%0A%0A📢 *Status:* Menunggu konfirmasi dari Admin HRS.%0A%0A_Hormat saya, calon member HRS_`;
+                const message = `*PENDAFTARAN HRS TEAM*%0A%0A📋 *Data Pendaftar:*%0A➤ Nama: ${encodeURIComponent(nama)}%0A➤ Roblox: ${encodeURIComponent(roblox)}%0A➤ Gender: ${encodeURIComponent(gender)}%0A➤ Umur: ${encodeURIComponent(umur)}%0A➤ WhatsApp: ${encodeURIComponent(waPendaftar)}%0A%0A📢 *Status:* Menunggu konfirmasi dari Admin HRS.%0A%0A_Hormat saya, calon member HRS_`;
                 
-                const waUrl = `https://wa.me/${waNumber}?text=${message}`;
+                const waUrl = `https://wa.me/${targetWa}?text=${message}`;
                 window.open(waUrl, '_blank');
                 
-                if(msgDiv) msgDiv.innerHTML = "✅ Terima kasih! WhatsApp akan terbuka. Kirim pesan untuk konfirmasi.";
+                if(msgDiv) msgDiv.innerHTML = "✅ WhatsApp akan terbuka! Kirim pesan untuk konfirmasi ke Admin.";
                 setTimeout(() => { 
                     formReg.reset(); 
+                    document.getElementById('targetWaNumber').value = "6285198405683";
                     if(modalReg) modalReg.style.display = 'none'; 
                     if(msgDiv) msgDiv.innerHTML = ""; 
                 }, 2500);
