@@ -133,8 +133,9 @@
             width: 48px;
             height: 48px;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 0px;
             filter: drop-shadow(0 0 10px #fbd92b);
+            background: transparent;
         }
         .brand-title {
             font-size: 1.8rem;
@@ -289,9 +290,9 @@
             width: 70px; 
             height: 70px; 
             object-fit: contain;
-            border-radius: 16px; 
-            background: rgba(0,0,0,0.2);
-            padding: 4px;
+            border-radius: 0px;
+            background: transparent;
+            padding: 0px;
         }
         .trigger-text h3 { color: #ffffff; font-size: 1.2rem; }
         .trigger-text p { color: #d4b5ff; font-size: 0.75rem; }
@@ -490,6 +491,8 @@
             object-fit: contain;
             margin: 0 auto 10px;
             display: block;
+            border-radius: 0px;
+            background: transparent;
         }
         .wa-target-input { margin-top: 10px; margin-bottom: 10px; }
         .wa-target-input label { font-size: 0.75rem; color: #fbd92b; display: block; text-align: left; margin-bottom: 5px; }
@@ -518,6 +521,8 @@
             margin-bottom: 25px;
             animation: goldFloat 1.5s infinite alternate;
             filter: drop-shadow(0 0 15px #fbd92b);
+            background: transparent;
+            border-radius: 0px;
         }
         @keyframes goldFloat {
             0% { transform: translateY(0px); filter: drop-shadow(0 0 5px #fbd92b); }
@@ -553,16 +558,16 @@
 <div class="particles" id="particles"></div>
 
 <div id="preloader" class="preloader">
-    <img class="preloader-logo" src="https://files.catbox.moe/fp3kpi.jpg" alt="HIRS Logo">
+    <img class="preloader-logo" src="https://files.catbox.moe/gcgj82.jpg" alt="HRS Logo">
     <h2>HRS RACING</h2>
-    <p>HIRS Racing Style</p>
+    <p>Hulubalang Racing Style</p>
     <div class="preloader-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
 </div>
 
 <div class="top-bar">
     <div class="container">
         <div class="logo-area">
-            <img class="logo-img" src="https://files.catbox.moe/fp3kpi.jpg" alt="HIRS">
+            <img class="logo-img" src="https://files.catbox.moe/gcgj82.jpg" alt="HRS">
             <div class="brand-title">HRS OFFICIAL</div>
         </div>
         <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
@@ -577,13 +582,13 @@
 <div class="main-content">
     <div class="search-section">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔎 Cari produk HIRS...">
+            <input type="text" id="searchInput" placeholder="🔎 Cari produk HRS...">
             <button id="searchBtn">Cari</button>
         </div>
     </div>
 
     <div id="registerTriggerBlock" class="register-trigger">
-        <img class="trigger-logo" src="https://files.catbox.moe/fp3kpi.jpg" alt="logo">
+        <img class="trigger-logo" src="https://files.catbox.moe/gcgj82.jpg" alt="logo">
         <div class="trigger-text">
             <h3>⚡ DAFTAR MENJADI ANGGOTA HRS ⚡</h3>
             <p>Isi formulir, kirim via WhatsApp ke Admin pilihan!</p>
@@ -592,7 +597,7 @@
 
     <section id="shop">
         <div class="hero-section-title">
-            <div class="hero-title">HIRS RACING STYLE</div>
+            <div class="hero-title">HULUBALANG RACING STYLE</div>
             <div class="hero-subtitle">SPEED • IDENTITY • BROTHERHOOD</div>
             <div class="hero-divider"></div>
         </div>
@@ -609,7 +614,7 @@
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" id="closeModal">&times;</span>
-            <img class="modal-logo-form" src="https://files.catbox.moe/fp3kpi.jpg" alt="logo">
+            <img class="modal-logo-form" src="https://files.catbox.moe/gcgj82.jpg" alt="logo">
             <h3>📝 FORMULIR HRS</h3>
             <form class="modal-form" id="registerFormModal">
                 <input type="text" id="fullName" placeholder="Nama Lengkap" required>
@@ -650,10 +655,10 @@
     <section id="team">
         <h2 class="section-title">🏆 ELITE CREW - HRS RACING 🏆</h2>
         <div class="team-grid" id="teamGrid"></div>
-        <p style="text-align:center; color:#d4b5ff;">#HIRSFamily | Fast & Respect</p>
+        <p style="text-align:center; color:#d4b5ff;">#HRSFamily | Fast & Respect</p>
     </section>
 
-    <footer><div>🏁 HIRS RACING STYLE — OFFICIAL COMMUNITY 🏁</div><div>© 2025 HIRS | Unity • Style • Speed</div></footer>
+    <footer><div>🏁 HULUBALANG RACING STYLE — HRS OFFICIAL COMMUNITY 🏁</div><div>© 2025 HRS | Unity • Style • Speed</div></footer>
 </div>
 
 <script>
@@ -666,41 +671,52 @@
             { name:"🏍️ JOKI HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/share?code=fb1f44d037ff684a891b82baceccf0dc&type=AvatarItemDetails", category:"Joki", keywords:"joki" },
             { name:"⚡Hoodie HRS", image:"https://tr.rbxcdn.com/180DAY-69dd90a121c94d5a6de885b97067db60/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/id/catalog/90308171691153", category:"Member", keywords:"Hoodie" }
         ];
+        
+        // TIM DENGAN 4 ADMIN (2 baru ditambahkan)
         const teamList = [
             { name:"zany", displayName:"zany", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-750B50A581AEF370E2B0C0592B9402D0-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/2829947199", role:"Owner" },
-            { name:"Faqih_1237822", displayName:"Faqih_1237822", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-C7B40895FBAAD9AB5B710C2067D7AFC4-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8823285553", role:"Tangan Kanan Owner" },
             { name:"ECELXSPEED", displayName:"ECELXSPEED", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-F00E072A8B364CF6F218D540215A3DC4-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8776368660", role:"Admin" },
-            { name:"TOGAR50", displayName:"TOGAR50", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-822CA83A6C2BDA102DEB9FB7B98CC1FE-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8250092726", role:"Admin" },
-            { name:"adipbaehaki", displayName:"adipbaehaki", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-1BE42051C1AA51FCB8A0B9FB3E8D18AC-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/2841809745", role:"Admin" }
+            { name:"zahkmugpp", displayName:"zahkmugpp", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-40BC536E63AE34EBCAC8F7FC00E9FE42-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/9793605438", role:"Admin" },
+            { name:"Rrii", displayName:"Rrii", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-08EE251944A4E13145AC6D8C3F30B293-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8816536198", role:"Admin" }
         ];
+        
         const productGrid = document.getElementById('productGrid');
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
         let currentCategory = "ALL", currentSearch = "";
+        
         function renderProducts() {
             let filtered = [...products];
             if(currentCategory !== "ALL") filtered = filtered.filter(p => p.category === currentCategory);
             if(currentSearch.trim()) filtered = filtered.filter(p => p.name.toLowerCase().includes(currentSearch.toLowerCase()) || p.keywords.includes(currentSearch.toLowerCase()));
-            productGrid.innerHTML = filtered.length === 0 ? `<div style="text-align:center;padding:40px;">✨ Produk tidak ditemukan ✨</div>` : filtered.map(p => `<div class="product-card"><img class="product-img" src="${p.image}" onerror="this.src='https://placehold.co/400x400/2a1a4a/fbd92b?text=HIRS'"><div class="product-name">${p.name}</div><a href="${p.link}" target="_blank" class="btn-buy">BELI SEKARANG →</a></div>`).join('');
+            productGrid.innerHTML = filtered.length === 0 ? `<div style="text-align:center;padding:40px;">✨ Produk tidak ditemukan ✨</div>` : filtered.map(p => `<div class="product-card"><img class="product-img" src="${p.image}" onerror="this.src='https://placehold.co/400x400/2a1a4a/fbd92b?text=HRS'"><div class="product-name">${p.name}</div><a href="${p.link}" target="_blank" class="btn-buy">BELI SEKARANG →</a></div>`).join('');
         }
+        
         document.querySelectorAll('.category-tab').forEach(tab => tab.addEventListener('click', () => { document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active')); tab.classList.add('active'); currentCategory = tab.dataset.category; renderProducts(); }));
         searchBtn.onclick = () => { currentSearch = searchInput.value; renderProducts(); };
         searchInput.onkeyup = (e) => { if(e.key === 'Enter') { currentSearch = searchInput.value; renderProducts(); } };
         renderProducts();
+        
         const teamContainer = document.getElementById('teamGrid');
-        if(teamContainer) teamList.forEach(m => { teamContainer.innerHTML += `<div class="team-card"><img class="team-avatar-img" src="${m.avatar}" onerror="this.src='https://placehold.co/140x140/2a1a4a/fbd92b?text=HIRS'"><div class="role-name">${m.displayName}</div><div class="role-title">👑 ${m.role}</div><a href="${m.profile}" target="_blank" class="btn-view-profile">👤 LIHAT PROFILE</a></div>`; });
+        if(teamContainer) teamList.forEach(m => { teamContainer.innerHTML += `<div class="team-card"><img class="team-avatar-img" src="${m.avatar}" onerror="this.src='https://placehold.co/140x140/2a1a4a/fbd92b?text=HRS'"><div class="role-name">${m.displayName}</div><div class="role-title">👑 ${m.role}</div><a href="${m.profile}" target="_blank" class="btn-view-profile">👤 LIHAT PROFILE</a></div>`; });
+        
         const preloaderDiv = document.getElementById('preloader');
         if(preloaderDiv) { const hide = () => { if(preloaderDiv && !preloaderDiv.classList.contains('hide')) { preloaderDiv.classList.add('hide'); setTimeout(() => { if(preloaderDiv) preloaderDiv.style.display = 'none'; }, 500); } }; setTimeout(hide, 2000); window.addEventListener('load', () => setTimeout(hide, 600)); }
+        
         const hamburger = document.getElementById('hamburger'), navMenu = document.getElementById('navMenu');
         if(hamburger && navMenu) { hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); }); document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); })); }
+        
         document.querySelectorAll('a[href^="#"]').forEach(anchor => anchor.addEventListener('click', function(e) { const targetId = this.getAttribute('href'); if(targetId && targetId !== "#") { const target = document.querySelector(targetId); if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } } }));
+        
         const modalReg = document.getElementById('registerModal'), trigger = document.getElementById('registerTriggerBlock'), daftarNav = document.getElementById('daftarBtnNav'), closeModal = document.getElementById('closeModal');
         if(trigger) trigger.onclick = () => modalReg.style.display = 'flex';
         if(daftarNav) daftarNav.onclick = (e) => { e.preventDefault(); modalReg.style.display = 'flex'; };
         if(closeModal) closeModal.onclick = () => modalReg.style.display = 'none';
         window.onclick = (e) => { if(e.target === modalReg) modalReg.style.display = 'none'; };
+        
         const formReg = document.getElementById('registerFormModal'), msgDiv = document.getElementById('modalMessage');
-        if(formReg) formReg.onsubmit = function(e) { e.preventDefault(); const nama = document.getElementById('fullName').value.trim(), roblox = document.getElementById('robloxUser').value.trim(), gender = document.getElementById('gender').value, umur = document.getElementById('age').value.trim(), waPendaftar = document.getElementById('whatsappNumber').value.trim(), targetWa = document.getElementById('targetWaNumber').value.trim(); if(!nama || !roblox || !gender || !umur || !waPendaftar) { msgDiv.innerHTML = "⚠️ Lengkapi semua field!"; return; } if(!targetWa) { msgDiv.innerHTML = "⚠️ Masukkan nomor WA Admin!"; return; } const message = `*PENDAFTARAN HRS TEAM*%0A%0A📋 *Data Pendaftar:*%0A➤ Nama: ${encodeURIComponent(nama)}%0A➤ Roblox: ${encodeURIComponent(roblox)}%0A➤ Gender: ${encodeURIComponent(gender)}%0A➤ Umur: ${encodeURIComponent(umur)}%0A➤ WhatsApp: ${encodeURIComponent(waPendaftar)}%0A%0A📢 *Status:* Menunggu konfirmasi Admin HIRS.%0A%0A_Hormat saya, calon member HRS_`; window.open(`https://wa.me/${targetWa}?text=${message}`, '_blank'); msgDiv.innerHTML = "✅ WhatsApp terbuka! Kirim pesan ke Admin."; setTimeout(() => { formReg.reset(); document.getElementById('targetWaNumber').value = "6285198405683"; modalReg.style.display = 'none'; msgDiv.innerHTML = ""; }, 2500); };
+        if(formReg) formReg.onsubmit = function(e) { e.preventDefault(); const nama = document.getElementById('fullName').value.trim(), roblox = document.getElementById('robloxUser').value.trim(), gender = document.getElementById('gender').value, umur = document.getElementById('age').value.trim(), waPendaftar = document.getElementById('whatsappNumber').value.trim(), targetWa = document.getElementById('targetWaNumber').value.trim(); if(!nama || !roblox || !gender || !umur || !waPendaftar) { msgDiv.innerHTML = "⚠️ Lengkapi semua field!"; return; } if(!targetWa) { msgDiv.innerHTML = "⚠️ Masukkan nomor WA Admin!"; return; } const message = `*PENDAFTARAN HRS TEAM*%0A%0A📋 *Data Pendaftar:*%0A➤ Nama: ${encodeURIComponent(nama)}%0A➤ Roblox: ${encodeURIComponent(roblox)}%0A➤ Gender: ${encodeURIComponent(gender)}%0A➤ Umur: ${encodeURIComponent(umur)}%0A➤ WhatsApp: ${encodeURIComponent(waPendaftar)}%0A%0A📢 *Status:* Menunggu konfirmasi Admin HRS.%0A%0A_Hormat saya, calon member HRS_`; window.open(`https://wa.me/${targetWa}?text=${message}`, '_blank'); msgDiv.innerHTML = "✅ WhatsApp terbuka! Kirim pesan ke Admin."; setTimeout(() => { formReg.reset(); document.getElementById('targetWaNumber').value = "6285198405683"; modalReg.style.display = 'none'; msgDiv.innerHTML = ""; }, 2500); };
+        
         const partContainer = document.getElementById('particles');
         if(partContainer) for(let i=0;i<75;i++) { let p = document.createElement('div'); p.classList.add('particle'); let s = Math.random() * 9 + 3; p.style.width = s+'px'; p.style.height = s+'px'; p.style.left = Math.random()*100+'%'; p.style.top = Math.random()*100+'%'; p.style.animationDuration = 12 + Math.random() * 20 + 's'; partContainer.appendChild(p); }
     })();
