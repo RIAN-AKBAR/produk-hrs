@@ -30,13 +30,12 @@
             background: #ffffff;
         }
         
-        /* Hapus efek gradasi dan kilap karena background putih */
         .bg-wallpaper::before,
         .bg-wallpaper::after {
             display: none;
         }
         
-        /* Partikel halus warna abu-abu/emas tipis untuk sentuhan */
+        /* Partikel halus warna emas tipis */
         .particles {
             position: fixed;
             top: 0;
@@ -48,21 +47,21 @@
         }
         .particle {
             position: absolute;
-            background: rgba(251, 217, 43, 0.15);
+            background: rgba(251, 217, 43, 0.12);
             border-radius: 50%;
             filter: blur(4px);
             animation: floatParticle 16s infinite alternate ease-in-out;
         }
         @keyframes floatParticle {
             0% { transform: translateY(0px) translateX(0px); opacity: 0; }
-            100% { transform: translateY(-80px) translateX(50px); opacity: 0.3; }
+            100% { transform: translateY(-80px) translateX(50px); opacity: 0.4; }
         }
         
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #f0f0f0; }
         ::-webkit-scrollbar-thumb { background: #fbd92b; border-radius: 20px; }
         
-        /* TOP BAR - putih dengan bayangan tipis */
+        /* TOP BAR */
         .top-bar {
             position: fixed;
             top: 0;
@@ -622,11 +621,13 @@
 
 <script>
     (function() {
+        // PRODUK LENGKAP DENGAN CELANA BARU YANG DITAMBAHKAN
         const products = [
             { name:"👑 BAJU OWNER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/933440365f1a914c94cc086b5a62d778", category:"Owner", keywords:"owner" },
             { name:"🛡️ BAJU ADMIN HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/6dc15947f4529445b5256efeaf8fb2eb", category:"Admin", keywords:"admin" },
             { name:"⚡ BAJU MEMBER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/7d15d05b14f9114ea74046f60ef468a2", category:"Member", keywords:"member" },
             { name:"👖 CELANA HRS", image:"https://tr.rbxcdn.com/180DAY-6a7f3c2c374a446c5276e72c7debbfca/420/420/Pants/Webp/noFilter", link:"https://www.roblox.com/share?code=0c584af8f9952243b99e1f442a1176e0&type=AvatarItemDetails", category:"Member", keywords:"celana" },
+            { name:"👖 CELANA HRS V2", image:"https://tr.rbxcdn.com/180DAY-e5955ab1faeea568c2f1fa470697bb00/420/420/Pants/Webp/noFilter", link:"https://www.roblox.com/catalog/83436593433412", category:"Member", keywords:"celana v2 new" },
             { name:"🏍️ JOKI HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/share?code=fb1f44d037ff684a891b82baceccf0dc&type=AvatarItemDetails", category:"Joki", keywords:"joki" },
             { name:"⚡Hoodie HRS", image:"https://tr.rbxcdn.com/180DAY-69dd90a121c94d5a6de885b97067db60/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/id/catalog/90308171691153", category:"Member", keywords:"Hoodie" }
         ];
