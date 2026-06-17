@@ -476,7 +476,7 @@
             color: #94a3b8;
         }
 
-        /* ========== MODAL MODERN DENGAN PILIHAN ADMIN ========== */
+        /* ========== MODAL MODERN DENGAN SATU ADMIN ========== */
         .modal {
             display: none;
             position: fixed;
@@ -562,44 +562,31 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(245, 176, 66, 0.3);
         }
-        .admin-option {
+        .admin-info {
+            background: #f8f9fc;
+            border-radius: 40px;
+            padding: 12px 20px;
+            margin: 16px 0 12px;
+            border: 1px solid #e9ecef;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
-            background: #f8f9fc;
-            padding: 10px 16px;
-            border-radius: 40px;
-            margin-bottom: 10px;
-            border: 1px solid #e9ecef;
-        }
-        .admin-option input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #f5b042;
-            cursor: pointer;
-            flex-shrink: 0;
-            margin: 0;
-        }
-        .admin-option label {
             font-size: 0.9rem;
-            font-weight: 500;
             color: #2d2d44;
-            cursor: pointer;
-            flex: 1;
         }
-        .admin-option .admin-badge {
+        .admin-info .badge {
             background: #e67e22;
             color: white;
             font-size: 0.6rem;
             font-weight: 700;
-            padding: 2px 10px;
+            padding: 2px 12px;
             border-radius: 20px;
             letter-spacing: 0.3px;
         }
-        .admin-option .admin-number {
-            font-size: 0.75rem;
-            color: #7f8c8d;
-            font-weight: 400;
+        .admin-info .number {
+            font-weight: 600;
+            color: #1e1e2f;
         }
         .wa-note {
             font-size: 0.7rem;
@@ -653,8 +640,7 @@
         @media (max-width: 480px) {
             .modal-content { padding: 24px 20px; }
             .modal-title { font-size: 1.3rem; }
-            .admin-option { padding: 8px 14px; }
-            .admin-option label { font-size: 0.8rem; }
+            .admin-info { font-size: 0.8rem; padding: 10px 16px; flex-wrap: wrap; }
         }
     </style>
 </head>
@@ -697,7 +683,7 @@
         <img class="trigger-logo" src="https://files.catbox.moe/gcgj82.jpg" alt="logo">
         <div class="trigger-text">
             <h3>⚡ DAFTAR MENJADI ANGGOTA HRS ⚡</h3>
-            <p>Isi formulir, pilih Admin, kirim via WhatsApp</p>
+            <p>Isi formulir, kirim via WhatsApp ke Admin</p>
         </div>
     </div>
 
@@ -717,13 +703,13 @@
         <div class="product-grid" id="productGrid"></div>
     </section>
 
-    <!-- ========== MODAL DAFTAR DENGAN PILIHAN ADMIN ========== -->
+    <!-- ========== MODAL DAFTAR DENGAN SATU ADMIN ========== -->
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" id="closeModal">&times;</span>
             <img src="https://files.catbox.moe/gcgj82.jpg" width="70" style="margin:0 auto 10px; display:block;">
             <div class="modal-title">📝 FORMULIR PENDAFTARAN</div>
-            <div class="modal-subtitle">Isi data diri, pilih Admin, lalu kirim via WhatsApp</div>
+            <div class="modal-subtitle">Isi data diri, lalu kirim via WhatsApp ke Admin HRS</div>
 
             <form class="modal-form" id="registerFormModal">
                 <input type="text" id="fullName" placeholder="Nama Lengkap" required>
@@ -736,33 +722,17 @@
                 <input type="number" id="age" placeholder="Umur" required>
                 <input type="tel" id="whatsappNumber" placeholder="Nomor WhatsApp Kamu" required>
 
-                <!-- PILIHAN ADMIN -->
-                <div style="margin: 16px 0 12px;">
-                    <label style="font-weight:600; font-size:0.9rem; color:#1e2a36; display:block; margin-bottom:8px;">📱 Pilih Admin Tujuan:</label>
-
-                    <div class="admin-option">
-                        <input type="radio" name="adminChoice" value="628211670389" id="admin1" checked>
-                        <label for="admin1">
-                            <span style="font-weight:600;">Admin 1</span>
-                            <span class="admin-number">(628211670389)</span>
-                        </label>
-                        <span class="admin-badge">AKTIF</span>
-                    </div>
-
-                    <div class="admin-option">
-                        <input type="radio" name="adminChoice" value="6285198405683" id="admin2">
-                        <label for="admin2">
-                            <span style="font-weight:600;">Admin 2</span>
-                            <span class="admin-number">(6285198405683)</span>
-                        </label>
-                        <span class="admin-badge">AKTIF</span>
-                    </div>
+                <!-- Informasi Admin (satu pilihan) -->
+                <div class="admin-info">
+                    <span>📱 Admin Tujuan :</span>
+                    <span class="number">628211670389</span>
+                    <span class="badge">AKTIF</span>
                 </div>
 
                 <button type="submit">📱 KIRIM KE WHATSAPP</button>
             </form>
             <div id="modalMessage" style="font-size:0.75rem; margin-top:14px; text-align:center;"></div>
-            <div class="wa-note">💡 Pesan akan otomatis terkirim ke Admin pilihan Anda</div>
+            <div class="wa-note">💡 Pesan akan otomatis terkirim ke Admin HRS</div>
         </div>
     </div>
 
@@ -776,7 +746,7 @@
         </ol>
     </div>
 
-    <!-- ========== TUTORIAL PENDAFTARAN ========== -->
+    <!-- ========== TUTORIAL PENDAFTARAN (sudah disesuaikan) ========== -->
     <div class="tutorial-box">
         <h3>📘 TUTORIAL PENDAFTARAN HRS</h3>
         <div class="step-list">
@@ -790,7 +760,7 @@
             </div>
             <div class="step-item">
                 <span class="step-number">3</span>
-                <span class="step-text">Pilih <strong>Admin tujuan</strong> (Admin 1 atau Admin 2) untuk mengirim pesan pendaftaran.</span>
+                <span class="step-text">Pendaftaran akan otomatis dikirim ke <strong>Admin HRS</strong> (628211670389).</span>
             </div>
             <div class="step-item">
                 <span class="step-number">4</span>
@@ -876,7 +846,7 @@
             if(targetId && targetId !== "#") { const target = document.querySelector(targetId); if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } }
         }));
 
-        // ========== MODAL DAFTAR DENGAN PILIHAN ADMIN ==========
+        // ========== MODAL DAFTAR DENGAN SATU ADMIN ==========
         const modalReg = document.getElementById('registerModal');
         const trigger = document.getElementById('registerTriggerBlock');
         const daftarNav = document.getElementById('daftarBtnNav');
@@ -889,6 +859,7 @@
 
         const formReg = document.getElementById('registerFormModal');
         const msgDiv = document.getElementById('modalMessage');
+        const ADMIN_TUJUAN = "628211670389"; // Hanya satu admin
 
         if(formReg) {
             formReg.onsubmit = function(e) {
@@ -899,17 +870,8 @@
                 const umur = document.getElementById('age').value.trim();
                 const waPendaftar = document.getElementById('whatsappNumber').value.trim();
 
-                // Ambil nomor admin dari radio button yang dipilih
-                const selectedAdmin = document.querySelector('input[name="adminChoice"]:checked');
-                const targetWa = selectedAdmin ? selectedAdmin.value : '';
-
                 if(!nama || !roblox || !gender || !umur || !waPendaftar) {
                     msgDiv.innerHTML = "⚠️ Lengkapi semua field!";
-                    msgDiv.style.color = "#e74c3c";
-                    return;
-                }
-                if(!targetWa) {
-                    msgDiv.innerHTML = "⚠️ Pilih Admin tujuan!";
                     msgDiv.style.color = "#e74c3c";
                     return;
                 }
@@ -917,13 +879,12 @@
                 // Format pesan WhatsApp
                 const message = `*PENDAFTARAN HRS TEAM*%0A%0A📋 *Data Pendaftar:*%0A➤ Nama: ${encodeURIComponent(nama)}%0A➤ Roblox: ${encodeURIComponent(roblox)}%0A➤ Gender: ${encodeURIComponent(gender)}%0A➤ Umur: ${encodeURIComponent(umur)}%0A➤ WhatsApp: ${encodeURIComponent(waPendaftar)}%0A%0A📢 *Status:* Menunggu konfirmasi Admin HRS.%0A%0A_Hormat saya, calon member HRS_`;
 
-                window.open(`https://wa.me/${targetWa}?text=${message}`, '_blank');
+                window.open(`https://wa.me/${ADMIN_TUJUAN}?text=${message}`, '_blank');
                 msgDiv.innerHTML = "✅ WhatsApp terbuka! Kirim pesan ke Admin.";
                 msgDiv.style.color = "#27ae60";
 
                 setTimeout(() => {
                     formReg.reset();
-                    document.getElementById('admin1').checked = true;
                     modalReg.style.display = 'none';
                     msgDiv.innerHTML = "";
                 }, 2500);
@@ -935,4 +896,4 @@
     })();
 </script>
 </body>
-</html>
+    </html>
