@@ -788,15 +788,39 @@
 
 <script>
     (function() {
+        // ======================================================
+        // 1. SCRIPT PELACAK PENGUNJUNG (VISITOR TRACKER)
+        // ======================================================
+        const domain = 'produk-hrs.vercel.app';
+        
+        // Fungsi untuk mengirim data pengunjung
+        function trackVisitor() {
+            fetch('https://website-monitor.vercel.app/api/track-visitor', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    website: domain, 
+                    page: window.location.pathname 
+                })
+            }).catch(err => console.log('Tracker error:', err));
+        }
+
+        // Kirim saat halaman dimuat
+        trackVisitor();
+
+        // Kirim setiap 30 detik (30000 ms)
+        setInterval(trackVisitor, 30000);
+
+        // ======================================================
+        // 2. LOGIKA WEBSITE (PRODUK, TEAM, MODAL, DLL)
+        // ======================================================
         const products = [
             { name:"👑 BAJU OWNER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/933440365f1a914c94cc086b5a62d778", category:"Owner", keywords:"owner" },
             { name:"🛡️ BAJU ADMIN HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/6dc15947f4529445b5256efeaf8fb2eb", category:"Admin", keywords:"admin" },
             { name:"⚡ BAJU MEMBER HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/catalog/7d15d05b14f9114ea74046f60ef468a2", category:"Member", keywords:"member" },
             { name:"👖 CELANA HRS", image:"https://tr.rbxcdn.com/180DAY-6a7f3c2c374a446c5276e72c7debbfca/420/420/Pants/Webp/noFilter", link:"https://www.roblox.com/share?code=0c584af8f9952243b99e1f442a1176e0&type=AvatarItemDetails", category:"Member", keywords:"celana" },
             { name:"👖 CELANA HRS V2", image:"https://tr.rbxcdn.com/180DAY-e5955ab1faeea568c2f1fa470697bb00/420/420/Pants/Webp/noFilter", link:"https://www.roblox.com/catalog/83436593433412", category:"Member", keywords:"celana v2 new" },
-            // Produk baru: Jaket
             { name:"🧥 JAKET HRS", image:"https://tr.rbxcdn.com/180DAY-1330084f1704752348358a03ed064e0a/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/id/catalog/74323555241512", category:"Jaket", keywords:"jaket jacket" },
-            // Produk baru: Celana
             { name:"👖 CELANA HRS V3", image:"https://tr.rbxcdn.com/180DAY-47b280ef2c6c7c05706854d1146023da/420/420/Pants/Webp/noFilter", link:"https://www.roblox.com/id/catalog/81969888372786", category:"Celana", keywords:"celana v3 new" },
             { name:"🏍️ JOKI HRS", image:"https://tr.rbxcdn.com/180DAY-755f2a2639f9f1c492fea6f1906cbc7d/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/share?code=fb1f44d037ff684a891b82baceccf0dc&type=AvatarItemDetails", category:"Joki", keywords:"joki" },
             { name:"⚡Hoodie HRS", image:"https://tr.rbxcdn.com/180DAY-69dd90a121c94d5a6de885b97067db60/420/420/Shirt/Webp/noFilter", link:"https://www.roblox.com/id/catalog/90308171691153", category:"Member", keywords:"Hoodie" }
@@ -808,7 +832,6 @@
             { name:"ECELXSPEED", displayName:"ECELXSPEED", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-F00E072A8B364CF6F218D540215A3DC4-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8776368660", role:"Penerimaan Member" },
             { name:"zahkmugpp", displayName:"zahkmugpp", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-40BC536E63AE34EBCAC8F7FC00E9FE42-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/9793605438", role:"Donatur" },
             { name:"Rrii", displayName:"Rrii", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-08EE251944A4E13145AC6D8C3F30B293-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8816536198", role:"Moderator" },
-            // Crew baru
             { name:"isyraf_bustaria", displayName:"isyraf_bustaria", avatar:"https://tr.rbxcdn.com/30DAY-AvatarHeadshot-5BB84CB931D41EE93DD3D483ACF8C906-Png/150/150/AvatarHeadshot/Webp/noFilter", profile:"https://www.roblox.com/id/users/8598047605", role:"Moderator" }
         ];
 
@@ -866,7 +889,7 @@
 
         const formReg = document.getElementById('registerFormModal');
         const msgDiv = document.getElementById('modalMessage');
-        const ADMIN_TUJUAN = "628211670389"; // Hanya satu admin
+        const ADMIN_TUJUAN = "628211670389";
 
         if(formReg) {
             formReg.onsubmit = function(e) {
@@ -883,7 +906,6 @@
                     return;
                 }
 
-                // Format pesan WhatsApp
                 const message = `*PENDAFTARAN HRS TEAM*%0A%0A📋 *Data Pendaftar:*%0A➤ Nama: ${encodeURIComponent(nama)}%0A➤ Roblox: ${encodeURIComponent(roblox)}%0A➤ Gender: ${encodeURIComponent(gender)}%0A➤ Umur: ${encodeURIComponent(umur)}%0A➤ WhatsApp: ${encodeURIComponent(waPendaftar)}%0A%0A📢 *Status:* Menunggu konfirmasi Admin HRS.%0A%0A_Hormat saya, calon member HRS_`;
 
                 window.open(`https://wa.me/${ADMIN_TUJUAN}?text=${message}`, '_blank');
